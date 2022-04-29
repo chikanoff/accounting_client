@@ -21,10 +21,7 @@ const theme = createTheme();
 const MainPage = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <MainLayout />
-      </Container>
+      <MainLayout>asdfsdaf</MainLayout>
     </ThemeProvider>
   );
 };
