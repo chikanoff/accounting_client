@@ -29,7 +29,9 @@ const Header = () => {
             {menuItems.map(({ name, path }, index) => (
               <MenuItem key={index}>
                 <Box>
-                  <MenuLink href={path}>{name}</MenuLink>
+                  <MenuButton onClick={() => navigate(path)}>
+                    {name}
+                  </MenuButton>
                 </Box>
               </MenuItem>
             ))}
@@ -48,9 +50,9 @@ const Header = () => {
   );
 };
 
-const MenuLink = styled(Link)`
+const MenuButton = styled(Link)`
   color: #fff;
-  text-decoration: none;
+  cursor: pointer;
 `;
 
 const MenuWrapper = styled(Box)`
