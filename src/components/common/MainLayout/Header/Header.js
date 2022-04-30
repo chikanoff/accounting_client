@@ -1,11 +1,21 @@
-import styled from '@emotion/styled/macro';
-import { AppBar, Box, Button, Typography } from '@mui/material';
-import { useMemo } from 'react';
-import FlexContainer from '../../FlexContainer';
+import { useNavigate } from "react-router-dom";
+import styled from "@emotion/styled/macro";
+import { AppBar, Box, Button, Typography } from "@mui/material";
+import { useMemo } from "react";
+import FlexContainer from "../../FlexContainer";
+import Link from "@mui/material/Link";
 
 const Header = () => {
+  const navigate = useNavigate();
   const menuItems = useMemo(
-    () => /* user.type === 'admin' ? [...] : [...] */ [1, 2, 3, 4],
+    () => /* user.type === 'admin' ? [...] : [...] */ [
+      { name: "Главная", path: "/" },
+      { name: "Материалы", path: "/medicines" },
+      { name: "Получатели", path: "/employees" },
+      { name: "Поставщики", path: "/suppliers" },
+      { name: "Пользователи", path: "/users" },
+      { name: "Отделения", path: "/departments" },
+    ],
     [
       /*user?.type*/
     ]
@@ -13,12 +23,14 @@ const Header = () => {
 
   return (
     <AppBar>
-      <FlexContainer fullHeight centerY>
-        <MenuWrapper fullHeight xs={{ height: '100%' }}>
+      <FlexContainer>
+        <MenuWrapper fullHeight xs={{ height: "100%" }}>
           <MenuItemsWrapper>
-            {menuItems.map((i, index) => (
+            {menuItems.map(({ name, path }, index) => (
               <MenuItem key={index}>
-                <Typography>{`item #${i}`}</Typography>
+                <Box>
+                  <MenuLink href={path}>{name}</MenuLink>
+                </Box>
               </MenuItem>
             ))}
           </MenuItemsWrapper>
@@ -27,7 +39,7 @@ const Header = () => {
               <Typography>User Full Name</Typography>
             </MenuItem>
             <MenuItem>
-              <Button variant='secondary'>Logout</Button>
+              <Button variant="secondary">Выход</Button>
             </MenuItem>
           </MenuActions>
         </MenuWrapper>
@@ -36,11 +48,17 @@ const Header = () => {
   );
 };
 
+const MenuLink = styled(Link)`
+  color: #fff;
+  text-decoration: none;
+`;
+
 const MenuWrapper = styled(Box)`
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: 60px;
 `;
 
 const MenuItem = styled(Box)`

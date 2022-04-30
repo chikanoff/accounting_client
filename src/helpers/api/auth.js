@@ -23,12 +23,13 @@ export const fetchCurrentUser = async () => {
 
 export const login = async (username, password) => {
   try {
-    const res = await FetchAPI.post(`/auth/login`, {
+    const res = await FetchAPI.post(`/auth/signin`, {
       username,
       password,
     });
-    const { status, ...data } = res.data;
-    return status === "success" && data;
+    const { data } = res;
+    console.log(data);
+    return data;
   } catch (e) {
     console.error(e);
     return false;

@@ -15,6 +15,7 @@ const useLogin = () => {
       if (data) {
         setIsAuthenticated(true);
         setCurrentUserState(data);
+        console.log(currentUserState);
         navigate("/");
       } else {
         setIsAuthenticated(null);

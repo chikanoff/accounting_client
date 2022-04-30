@@ -20,12 +20,15 @@ const theme = createTheme();
 const SignInPage = () => {
   const login = useLogin();
   const navigate = useNavigate();
-  const onSubmit = useCallback(async ({ username, password, remember }) => {
-    const res = await login(username, password, remember);
-    if (res) {
-      navigate("/home");
-    }
-  }, []);
+  const onSubmit = useCallback(
+    async ({ username, password }) => {
+      const res = await login(username, password);
+      if (res) {
+        navigate("/home");
+      }
+    },
+    [login, navigate]
+  );
 
   const {
     handleSubmit,
@@ -68,7 +71,7 @@ const SignInPage = () => {
               required
               fullWidth
               id="username"
-              label="Email Address"
+              label="Username"
               name="username"
               autoComplete="username"
               autoFocus
@@ -102,11 +105,6 @@ const SignInPage = () => {
               <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
             </Grid>

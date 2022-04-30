@@ -7,13 +7,12 @@ import styled from "@emotion/styled/macro";
 
 const theme = createTheme();
 
-const MainPage = () => {
+const MedicinePage = () => {
   return (
     <ThemeProvider theme={theme}>
       <MainLayout>
         <MainBox>
-          <Typography>Main Page</Typography>
-          <Typography>Добро пожаловать в систему учета медикаментов</Typography>
+          <Typography>Medicine Page</Typography>
         </MainBox>
       </MainLayout>
     </ThemeProvider>
@@ -29,4 +28,4 @@ const MainBox = styled(Box)`
   flex-grow: 1;
 `;
 
-export default MainPage;
+export default MedicinePage;

@@ -1,24 +1,21 @@
-import styled from '@emotion/styled/macro';
-import { Container } from '@mui/material';
-import { createStyles, makeStyles } from '@mui/styles';
-import React from 'react';
-import { useRecoilValue } from 'recoil';
-import { sidebarOpenState } from '../../../atoms/sidebar';
-import FullPageContainer from '../FullPageContainer';
-import Footer from './Footer';
-import Header from './Header';
-import Sidebar from './Sidebar';
+import styled from "@emotion/styled/macro";
+import { Container } from "@mui/material";
+import { createStyles, makeStyles } from "@mui/styles";
+import React from "react";
+import FullPageContainer from "../FullPageContainer";
+import Footer from "./Footer";
+import Header from "./Header";
 
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
-      display: 'flex',
+      display: "flex",
     },
   })
 );
 
 const Main = styled.main`
-  margin-top: 32px;
+  margin-top: 60px;
   height: 100%;
   flex-grow: 1;
   padding: ${(props) => props.theme.spacing(3)};
