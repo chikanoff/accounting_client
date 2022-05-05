@@ -1,18 +1,20 @@
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const Page = ({ breadcrumbs, children, className, pageTitle, ...rest }) => {
   return (
-    <div className={className} {...rest}>
-      <Helmet>
-        <title>{pageTitle}</title>
-      </Helmet>
+    <HelmetProvider>
+      <div className={className} {...rest}>
+        <Helmet>
+          <title>{pageTitle}</title>
+        </Helmet>
 
-      {breadcrumbs}
-      <div>{children}</div>
-    </div>
+        {breadcrumbs}
+        <div>{children}</div>
+      </div>
+    </HelmetProvider>
   );
 };
 
-Page.displayName = 'Page';
+Page.displayName = "Page";
 
 export default Page;

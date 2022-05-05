@@ -4,7 +4,7 @@ export const checkAuth = async () => {
   try {
     const res = await FetchAPI.get(`/auth/check`);
     console.log(res.data);
-    return res.data.token;
+    return res.data;
   } catch (e) {
     console.error(e);
     return false;
@@ -27,9 +27,8 @@ export const login = async (username, password) => {
       username,
       password,
     });
-    const { data } = res;
-    console.log(data);
-    return data;
+    console.log(res);
+    return res.data;
   } catch (e) {
     console.error(e);
     return false;
@@ -38,7 +37,7 @@ export const login = async (username, password) => {
 
 export const logout = async () => {
   try {
-    await FetchAPI.post(`/auth/logout`);
+    await FetchAPI.post(`/auth/signout`);
     return true;
   } catch (e) {
     console.error(e);

@@ -1,12 +1,13 @@
 import axios from "axios";
 
 const FetchAPI = axios.create({
-  baseURL: "http://192.168.1.102:8080/api",
+  baseURL: "/api",
   headers: {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, PATCH, OPTIONS",
+    "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, OPTIONS, PATCH",
     Accept: "application/json",
   },
+  withCredentials: true,
 });
 
 export default FetchAPI;

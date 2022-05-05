@@ -4,7 +4,6 @@ import { currentUserState } from "../../atoms/auth";
 
 const AdminRoute = ({ children, ...rest }) => {
   const currentUser = useRecoilValue(currentUserState);
-  console.log(currentUser);
   return currentUser?.admin ? children : <Navigate to={{ pathname: "/" }} />;
 };
 

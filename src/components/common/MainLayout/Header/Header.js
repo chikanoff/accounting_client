@@ -4,9 +4,11 @@ import { AppBar, Box, Button, Typography } from "@mui/material";
 import { useMemo } from "react";
 import FlexContainer from "../../FlexContainer";
 import Link from "@mui/material/Link";
+import useLogout from "../../../../hooks/useLogout";
 
 const Header = () => {
   const navigate = useNavigate();
+  const logout = useLogout();
   const menuItems = useMemo(
     () => /* user.type === 'admin' ? [...] : [...] */ [
       { name: "Главная", path: "/" },
@@ -29,9 +31,7 @@ const Header = () => {
             {menuItems.map(({ name, path }, index) => (
               <MenuItem key={index}>
                 <Box>
-                  <MenuButton onClick={() => navigate(path)}>
-                    {name}
-                  </MenuButton>
+                  <MenuButton onClick={() => navigate(path)}>{name}</MenuButton>
                 </Box>
               </MenuItem>
             ))}
@@ -41,7 +41,9 @@ const Header = () => {
               <Typography>User Full Name</Typography>
             </MenuItem>
             <MenuItem>
-              <Button variant="secondary">Выход</Button>
+              <Button variant="secondary" onClick={logout}>
+                Выход
+              </Button>
             </MenuItem>
           </MenuActions>
         </MenuWrapper>

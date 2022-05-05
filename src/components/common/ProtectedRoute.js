@@ -4,7 +4,6 @@ import { isAuthenticatedState } from "../../atoms/auth";
 
 const ProtectedRoute = ({ children, ...rest }) => {
   const isAuthenticated = useRecoilValue(isAuthenticatedState);
-
   return isAuthenticated ? (
     children
   ) : (

@@ -1,11 +1,16 @@
-import { atom } from 'recoil';
+import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom } = recoilPersist();
 
 export const currentUserState = atom({
   default: null,
-  key: 'currentUser',
+  key: "currentUser",
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const isAuthenticatedState = atom({
   default: null,
-  key: 'isAuthenticated',
+  key: "isAuthenticated",
+  effects_UNSTABLE: [persistAtom],
 });

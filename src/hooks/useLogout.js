@@ -12,7 +12,7 @@ const useLogout = () => {
   const logout = useCallback(async () => {
     setIsAuthenticated(null);
     setCurrentUserState(null);
-    navigate("/login");
+    navigate("/signin");
     await authResource.logout();
   }, [navigate, setCurrentUserState, setIsAuthenticated]);
 

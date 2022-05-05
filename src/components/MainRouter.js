@@ -6,6 +6,10 @@ import MainPage from "./pages/MainPage";
 import MedicinePage from "./pages/MedicinePage";
 import ProtectedRoute from "./common/ProtectedRoute";
 import AdminRoute from "./common/AdminRoute";
+import SupplierPage from "./pages/SupplierPage";
+import EmployeePage from "./pages/EmployeePage";
+import DepartmentPage from "./pages/DepartmentPage";
+import UserPage from "./pages/UserPage";
 
 const MainRouter = () => (
   <Router>
@@ -25,6 +29,38 @@ const MainRouter = () => (
           element={
             <AdminRoute>
               <MedicinePage />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/suppliers"
+          element={
+            <AdminRoute>
+              <SupplierPage />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/employees"
+          element={
+            <AdminRoute>
+              <EmployeePage />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/users"
+          element={
+            <AdminRoute>
+              <UserPage />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/departments"
+          element={
+            <AdminRoute>
+              <DepartmentPage />
             </AdminRoute>
           }
         />
