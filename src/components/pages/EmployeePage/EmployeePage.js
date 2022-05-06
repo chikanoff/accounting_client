@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Box from "@mui/material/Box";
 import MainLayout from "../../common/MainLayout";
 import styled from "@emotion/styled/macro";
@@ -14,7 +14,7 @@ import Popup from "../../controls/Popup";
 const initialValues = {
   id: 0,
   fullName: "",
-  departmentId: 0,
+  department: { id: 0, name: "" },
 };
 
 const EmployeePage = () => {
@@ -31,55 +31,62 @@ const EmployeePage = () => {
     [records]
   );
 
-  const columns = [
-    { field: "id", headerName: "Id", width: 100 },
-    { field: "fullName", headerName: "Full Name", flex: 1 },
-    { field: "department", headerName: "Department", flex: 1 },
-    {
-      field: "action",
-      headerName: "Actions",
-      flex: 1,
-      sortable: false,
-      renderCell: (params) => (
-        <Box
-          display="flex"
-          flexDirection="row"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Box>
-            <Button
-              variant="outlined"
-              color="primary"
-              size="small"
-              onClick={() => {
-                const departmentId = records.find(
-                  (record) => record.id === params.row.id
-                ).department.id;
-                console.log(departmentId);
-                setRecordForEdit({ ...params.row, departmentId });
-                setOpenPopup(true);
-              }}
-            >
-              <EditIcon />
-            </Button>
+  const columns = useMemo(
+    () => [
+      { field: "id", headerName: "Id", width: 100 },
+      { field: "fullName", headerName: "Full Name", flex: 1 },
+      {
+        field: "department",
+        headerName: "Department",
+        flex: 1,
+        renderCell: (params) => <span>{params.row.department.name}</span>,
+      },
+      {
+        field: "action",
+        headerName: "Actions",
+        flex: 1,
+        sortable: false,
+        renderCell: (params) => (
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Box sx={{ mr: 2 }}>
+              <Button
+                variant="outlined"
+                color="primary"
+                size="small"
+                onClick={() => {
+                  const departmentId = records.find(
+                    (record) => record.id === params.row.id
+                  )?.department?.id;
+                  setRecordForEdit(params.row);
+                  setOpenPopup(true);
+                }}
+              >
+                <EditIcon />
+              </Button>
+            </Box>
+            <Box>
+              <Button
+                variant="outlined"
+                color="primary"
+                size="small"
+                onClick={() => {
+                  deleteRecord(params.row.id);
+                }}
+              >
+                <DeleteIcon />
+              </Button>
+            </Box>
           </Box>
-          <Box>
-            <Button
-              variant="outlined"
-              color="primary"
-              size="small"
-              onClick={() => {
-                deleteRecord(params.row.id);
-              }}
-            >
-              <DeleteIcon />
-            </Button>
-          </Box>
-        </Box>
-      ),
-    },
-  ];
+        ),
+      },
+    ],
+    []
+  );
 
   const addOrEdit = useCallback(async (data) => {
     if (data.id !== 0) {
@@ -96,9 +103,7 @@ const EmployeePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await employeesResource.getAll();
-      setRecords(
-        res.map((item) => ({ ...item, department: item.department.name }))
-      );
+      setRecords(res);
     };
     fetchData();
   }, []);
@@ -114,6 +119,7 @@ const EmployeePage = () => {
           }}
         >
           <Button
+            variant="outlined"
             onClick={() => {
               setRecordForEdit(initialValues);
               setOpenPopup(true);
@@ -139,7 +145,9 @@ const EmployeePage = () => {
           openPopup={openPopup}
           setOpenPopup={setOpenPopup}
         >
-          <EmployeeForm data={recordForEdit} onSubmit={addOrEdit} />
+          {openPopup && (
+            <EmployeeForm data={recordForEdit} onSubmit={addOrEdit} />
+          )}
         </Popup>
       </MainLayout>
     </Page>

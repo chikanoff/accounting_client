@@ -45,7 +45,7 @@ const SupplierPage = () => {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Box>
+          <Box sx={{ mr: 2 }}>
             <Button
               variant="outlined"
               color="primary"

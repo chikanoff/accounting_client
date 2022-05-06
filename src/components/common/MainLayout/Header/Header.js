@@ -5,22 +5,31 @@ import { useMemo } from "react";
 import FlexContainer from "../../FlexContainer";
 import Link from "@mui/material/Link";
 import useLogout from "../../../../hooks/useLogout";
+import { currentUserState } from "../../../../atoms/auth";
+import { useRecoilValue } from "recoil";
 
 const Header = () => {
   const navigate = useNavigate();
   const logout = useLogout();
-  const menuItems = useMemo(
-    () => /* user.type === 'admin' ? [...] : [...] */ [
-      { name: "Главная", path: "/" },
-      { name: "Материалы", path: "/medicines" },
-      { name: "Получатели", path: "/employees" },
-      { name: "Поставщики", path: "/suppliers" },
-      { name: "Пользователи", path: "/users" },
-      { name: "Отделения", path: "/departments" },
-    ],
-    [
-      /*user?.type*/
-    ]
+  const user = useRecoilValue(currentUserState);
+  const menuItems = useMemo(() =>
+    user.admin
+      ? [
+          { name: "Главная", path: "/" },
+          { name: "Материалы", path: "/medicines" },
+          { name: "Получатели", path: "/employees" },
+          { name: "Поставщики", path: "/suppliers" },
+          { name: "Пользователи", path: "/users" },
+          { name: "Отделения", path: "/departments" },
+        ]
+      : [
+          { name: "Главная", path: "/" },
+          { name: "Материалы", path: "/medicines" },
+          { name: "Приходы", path: "/comings" },
+          { name: "Расходы", path: "/consumptions" },
+          { name: "Отчеты", path: "/reports" },
+          { name: "Отделения", path: "/departments" },
+        ]
   );
 
   return (
@@ -38,7 +47,7 @@ const Header = () => {
           </MenuItemsWrapper>
           <MenuActions>
             <MenuItem>
-              <Typography>User Full Name</Typography>
+              <Typography>{user.username}</Typography>
             </MenuItem>
             <MenuItem>
               <Button variant="secondary" onClick={logout}>
