@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "@emotion/styled/macro";
 import { AppBar, Box, Button, Typography } from "@mui/material";
 import { useMemo } from "react";
@@ -9,6 +9,7 @@ import { currentUserState } from "../../../../atoms/auth";
 import { useRecoilValue } from "recoil";
 
 const Header = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const logout = useLogout();
   const user = useRecoilValue(currentUserState);
@@ -25,10 +26,10 @@ const Header = () => {
       : [
           { name: "Главная", path: "/" },
           { name: "Материалы", path: "/medicines" },
+          { name: "Учет", path: "/accounting" },
           { name: "Приходы", path: "/comings" },
           { name: "Расходы", path: "/consumptions" },
           { name: "Отчеты", path: "/reports" },
-          { name: "Отделения", path: "/departments" },
         ]
   );
 
@@ -40,18 +41,36 @@ const Header = () => {
             {menuItems.map(({ name, path }, index) => (
               <MenuItem key={index}>
                 <Box>
-                  <MenuButton onClick={() => navigate(path)}>{name}</MenuButton>
+                  {location.pathname === path ? (
+                    <ActiveMenuButton onClick={() => navigate(path)}>
+                      {name}
+                    </ActiveMenuButton>
+                  ) : (
+                    <MenuButton onClick={() => navigate(path)}>
+                      {name}
+                    </MenuButton>
+                  )}
                 </Box>
               </MenuItem>
             ))}
           </MenuItemsWrapper>
           <MenuActions>
             <MenuItem>
-              <Typography>{user.username}</Typography>
+              <Typography style={{ color: "white" }}>
+                {user.username}
+              </Typography>
             </MenuItem>
             <MenuItem>
-              <Button variant="secondary" onClick={logout}>
-                Выход
+              <Button variant="contained" color="primary" onClick={logout}>
+                <Typography
+                  style={{
+                    color: "white",
+                    fontWeight: "500",
+                    fontSize: "0.8rem",
+                  }}
+                >
+                  Выход
+                </Typography>
               </Button>
             </MenuItem>
           </MenuActions>
@@ -62,8 +81,19 @@ const Header = () => {
 };
 
 const MenuButton = styled(Link)`
-  color: #fff;
+  color: #f0f8ff;
+  text-decoration: none;
   cursor: pointer;
+  font-weight: 600;
+  &:hover {
+    color: #b0c4de;
+  }
+`;
+const ActiveMenuButton = styled(Link)`
+  color: #b0c4de;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 600;
 `;
 
 const MenuWrapper = styled(Box)`

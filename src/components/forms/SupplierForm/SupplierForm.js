@@ -20,6 +20,7 @@ const SupplierForm = ({ data, onSubmit }) => {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
+          style={{ width: "100%" }}
           display="flex"
           flexDirection="column"
           justifyContent="center"
@@ -27,6 +28,7 @@ const SupplierForm = ({ data, onSubmit }) => {
           pb={2}
         >
           <Box
+            style={{ width: "100%" }}
             display="flex"
             flexDirection="column"
             alignContent="center"

@@ -42,6 +42,7 @@ const EmployeeForm = ({ data, onSubmit }) => {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
+          style={{ width: "100%" }}
           display="flex"
           flexDirection="column"
           justifyContent="center"
@@ -49,6 +50,7 @@ const EmployeeForm = ({ data, onSubmit }) => {
           pb={2}
         >
           <Box
+            style={{ width: "100%" }}
             display="flex"
             flexDirection="column"
             alignContent="center"
@@ -71,9 +73,9 @@ const EmployeeForm = ({ data, onSubmit }) => {
               autoFocus
             />
             <FormControl fullWidth required>
-              <InputLabel>Department</InputLabel>
+              <InputLabel>Отделение</InputLabel>
               <Select
-                label="Department"
+                label="Отделение"
                 {...register("departmentId", {
                   required: true,
                   min: 1,
@@ -87,20 +89,6 @@ const EmployeeForm = ({ data, onSubmit }) => {
                 ))}
               </Select>
             </FormControl>
-            {/* <Autocomplete
-              disablePortal
-              id="combo-box-department"
-              options={departments.map((i) => ({ ...i, value: i.id }))}
-              // {...register("departmentId", {
-              //   required: true,
-              // })}
-              onChange={console.log}
-              sx={{ width: 300 }}
-              getOptionLabel={(option) => option.name}
-              renderInput={(params) => (
-                <TextField {...params} label="Отделение" />
-              )}
-            /> */}
           </Box>
 
           <Button type="submit" variant="outlined">

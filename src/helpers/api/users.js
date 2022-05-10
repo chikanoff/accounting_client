@@ -16,7 +16,7 @@ export const deleteById = async (id) => {
     return res.data;
   } catch (e) {
     console.error(e);
-    return false;
+    return e;
   }
 };
 
@@ -25,8 +25,7 @@ export const create = async (data) => {
     const res = await FetchAPI.post(`/admin/users`, data);
     return res.data;
   } catch (e) {
-    console.error(e);
-    return false;
+    return e.response;
   }
 };
 
@@ -35,8 +34,7 @@ export const update = async (id, data) => {
     const res = await FetchAPI.put(`/admin/users/${id}`, data);
     return res.data;
   } catch (e) {
-    console.error(e);
-    return false;
+    return e.response;
   }
 };
 

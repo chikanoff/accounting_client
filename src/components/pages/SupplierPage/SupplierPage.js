@@ -6,7 +6,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import Page from "../../common/Page";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import SupplierForm from "../../forms/SupplierForm";
 import Popup from "../../controls/Popup";
 import suppliersResource from "../../../helpers/api/suppliers";
@@ -46,8 +46,7 @@ const SupplierPage = () => {
           alignItems="center"
         >
           <Box sx={{ mr: 2 }}>
-            <Button
-              variant="outlined"
+            <IconButton
               color="primary"
               size="small"
               onClick={() => {
@@ -56,11 +55,10 @@ const SupplierPage = () => {
               }}
             >
               <EditIcon />
-            </Button>
+            </IconButton>
           </Box>
           <Box>
-            <Button
-              variant="outlined"
+            <IconButton
               color="primary"
               size="small"
               onClick={() => {
@@ -68,7 +66,7 @@ const SupplierPage = () => {
               }}
             >
               <DeleteIcon />
-            </Button>
+            </IconButton>
           </Box>
         </Box>
       ),
@@ -96,7 +94,7 @@ const SupplierPage = () => {
   }, []);
 
   return (
-    <Page title="Suppliers">
+    <Page title="Поставщики">
       <MainLayout>
         <Box
           sx={{
@@ -107,6 +105,7 @@ const SupplierPage = () => {
         >
           <Button
             variant="outlined"
+            style={{ marginBottom: "1rem" }}
             onClick={() => {
               setRecordForEdit(initialValues);
               setOpenPopup(true);

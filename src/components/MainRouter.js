@@ -10,6 +10,7 @@ import SupplierPage from "./pages/SupplierPage";
 import EmployeePage from "./pages/EmployeePage";
 import DepartmentPage from "./pages/DepartmentPage";
 import UserPage from "./pages/UserPage";
+import AccountingPage from "./pages/AccountingPage";
 
 const MainRouter = () => (
   <Router>
@@ -25,11 +26,19 @@ const MainRouter = () => (
           }
         />
         <Route
+          path="/accounting"
+          element={
+            <ProtectedRoute>
+              <AccountingPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/medicines"
           element={
-            <AdminRoute>
+            <ProtectedRoute>
               <MedicinePage />
-            </AdminRoute>
+            </ProtectedRoute>
           }
         />
         <Route

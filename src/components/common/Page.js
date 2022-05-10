@@ -1,11 +1,18 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
-const Page = ({ breadcrumbs, children, className, pageTitle, ...rest }) => {
+const Page = ({
+  breadcrumbs,
+  children,
+  className,
+  pageTitle,
+  title,
+  ...rest
+}) => {
   return (
     <HelmetProvider>
       <div className={className} {...rest}>
         <Helmet>
-          <title>{pageTitle}</title>
+          <title>{pageTitle || title}</title>
         </Helmet>
 
         {breadcrumbs}

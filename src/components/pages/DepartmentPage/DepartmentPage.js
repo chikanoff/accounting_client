@@ -7,7 +7,7 @@ import Page from "../../common/Page";
 import departmentsResource from "../../../helpers/api/departments";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import DepartmentForm from "../../forms/DepartmentForm";
 import Popup from "../../controls/Popup";
 
@@ -46,7 +46,7 @@ const DepartmentPage = () => {
           alignItems="center"
         >
           <Box sx={{ mr: 2 }}>
-            <Button
+            <IconButton
               variant="outlined"
               color="primary"
               size="small"
@@ -56,10 +56,10 @@ const DepartmentPage = () => {
               }}
             >
               <EditIcon />
-            </Button>
+            </IconButton>
           </Box>
           <Box>
-            <Button
+            <IconButton
               variant="outlined"
               color="primary"
               size="small"
@@ -68,7 +68,7 @@ const DepartmentPage = () => {
               }}
             >
               <DeleteIcon />
-            </Button>
+            </IconButton>
           </Box>
         </Box>
       ),
@@ -96,7 +96,7 @@ const DepartmentPage = () => {
   }, []);
 
   return (
-    <Page title="Departments">
+    <Page title="Отделения">
       <MainLayout>
         <Box
           sx={{
@@ -106,6 +106,9 @@ const DepartmentPage = () => {
           }}
         >
           <Button
+            variant="outlined"
+            color="primary"
+            style={{ marginBottom: "1rem" }}
             onClick={() => {
               setRecordForEdit(initialValues);
               setOpenPopup(true);

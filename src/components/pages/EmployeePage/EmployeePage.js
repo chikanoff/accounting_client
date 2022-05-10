@@ -7,7 +7,7 @@ import Page from "../../common/Page";
 import employeesResource from "../../../helpers/api/employees";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import EmployeeForm from "../../forms/EmployeeForm";
 import Popup from "../../controls/Popup";
 
@@ -54,8 +54,7 @@ const EmployeePage = () => {
             alignItems="center"
           >
             <Box sx={{ mr: 2 }}>
-              <Button
-                variant="outlined"
+              <IconButton
                 color="primary"
                 size="small"
                 onClick={() => {
@@ -67,11 +66,10 @@ const EmployeePage = () => {
                 }}
               >
                 <EditIcon />
-              </Button>
+              </IconButton>
             </Box>
             <Box>
-              <Button
-                variant="outlined"
+              <IconButton
                 color="primary"
                 size="small"
                 onClick={() => {
@@ -79,7 +77,7 @@ const EmployeePage = () => {
                 }}
               >
                 <DeleteIcon />
-              </Button>
+              </IconButton>
             </Box>
           </Box>
         ),
@@ -109,7 +107,7 @@ const EmployeePage = () => {
   }, []);
 
   return (
-    <Page title="Employees">
+    <Page title="Работники">
       <MainLayout>
         <Box
           sx={{
@@ -120,6 +118,7 @@ const EmployeePage = () => {
         >
           <Button
             variant="outlined"
+            style={{ marginBottom: "1rem" }}
             onClick={() => {
               setRecordForEdit(initialValues);
               setOpenPopup(true);
