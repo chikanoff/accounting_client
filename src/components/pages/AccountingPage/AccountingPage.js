@@ -16,6 +16,12 @@ const initialValues = {
   name: "",
 };
 
+const employeeInitial = {
+  id: 0,
+  fullName: "",
+  department: { id: 0, name: "" },
+};
+
 const AccountingPage = () => {
   const currentUser = useRecoilValue(currentUserState);
   const [records, setRecords] = useState([]);
@@ -23,7 +29,7 @@ const AccountingPage = () => {
   const [selectedMedicinesIds, setSelectedMedicinesIds] = useState([]);
   const [isIncome, setIsIncome] = useState(true);
   const [employees, setEmployees] = useState([]);
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [selectedEmployee, setSelectedEmployee] = useState(employeeInitial);
 
   const { register, handleSubmit } = useForm();
 

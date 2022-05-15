@@ -10,6 +10,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Button, IconButton } from "@mui/material";
 import MedicineForm from "../../forms/MedicineForm";
 import Popup from "../../controls/Popup";
+import MedicineInfoForm from "../../forms/MedicineInfoForm";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 const initialValues = {
   id: 0,
@@ -24,6 +26,8 @@ const MedicinePage = () => {
   const [records, setRecords] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
   const [recordForEdit, setRecordForEdit] = useState(initialValues);
+  const [openInfoPopup, setOpenInfoPopup] = useState(false);
+  const [recordForInfo, setRecordForInfo] = useState(initialValues);
 
   const deleteRecord = useCallback(
     async (deleteId) => {
@@ -53,7 +57,7 @@ const MedicinePage = () => {
       },
       {
         field: "action",
-        headerName: "Actions",
+        headerName: "Действия",
         flex: 1,
         sortable: false,
         renderCell: (params) => (
@@ -63,6 +67,19 @@ const MedicinePage = () => {
             justifyContent="space-between"
             alignItems="center"
           >
+            <Box sx={{ mr: 2 }}>
+              <IconButton
+                variant="outlined"
+                color="primary"
+                size="small"
+                onClick={() => {
+                  setRecordForInfo(params.row);
+                  setOpenInfoPopup(true);
+                }}
+              >
+                <InfoOutlinedIcon />
+              </IconButton>
+            </Box>
             <Box sx={{ mr: 2 }}>
               <IconButton
                 variant="outlined"
@@ -156,6 +173,13 @@ const MedicinePage = () => {
           {openPopup && (
             <MedicineForm data={recordForEdit} onSubmit={addOrEdit} />
           )}
+        </Popup>
+        <Popup
+          title="Информация"
+          openPopup={openInfoPopup}
+          setOpenPopup={setOpenInfoPopup}
+        >
+          {openInfoPopup && <MedicineInfoForm data={recordForInfo} />}
         </Popup>
       </MainLayout>
     </Page>

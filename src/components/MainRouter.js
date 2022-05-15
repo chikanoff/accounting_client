@@ -11,6 +11,9 @@ import EmployeePage from "./pages/EmployeePage";
 import DepartmentPage from "./pages/DepartmentPage";
 import UserPage from "./pages/UserPage";
 import AccountingPage from "./pages/AccountingPage";
+import ConsumptionPage from "./pages/ConsumptionPage";
+import ComingPage from "./pages/ComingPage";
+import ReportPage from "./pages/ReportPage";
 
 const MainRouter = () => (
   <Router>
@@ -71,6 +74,30 @@ const MainRouter = () => (
             <AdminRoute>
               <DepartmentPage />
             </AdminRoute>
+          }
+        />
+        <Route
+          path="/comings"
+          element={
+            <ProtectedRoute>
+              <ComingPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/consumptions"
+          element={
+            <ProtectedRoute>
+              <ConsumptionPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/reports"
+          element={
+            <ProtectedRoute>
+              <ReportPage />
+            </ProtectedRoute>
           }
         />
       </Routes>

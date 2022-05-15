@@ -32,7 +32,7 @@ const ComingPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await accountingsResource.getConsumptions();
+      const data = await accountingsResource.getIncomes();
       setRecords(data);
       console.log(data);
     };
@@ -48,12 +48,6 @@ const ComingPage = () => {
         headerName: "Пользователь",
         flex: 1,
         renderCell: (params) => <span>{params.row.user.fullName}</span>,
-      },
-      {
-        field: "employee",
-        headerName: "Получатель",
-        flex: 1,
-        renderCell: (params) => <span>{params.row.employee.fullName}</span>,
       },
       {
         field: "action",
@@ -88,11 +82,11 @@ const ComingPage = () => {
   );
 
   return (
-    <Page title="Расходы">
+    <Page title="Приходы">
       <MainLayout>
         {records.length === 0 ? (
           <Box>
-            <h1>Расходы не найдены</h1>
+            <h1>Приходы не найдены</h1>
           </Box>
         ) : (
           <Box>
@@ -107,7 +101,7 @@ const ComingPage = () => {
               columns={columns}
             />
             <Popup
-              title="Расход"
+              title="Приход"
               openPopup={openInfoPopup}
               setOpenPopup={setOpenInfoPopup}
             >

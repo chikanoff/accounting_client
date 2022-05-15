@@ -40,25 +40,21 @@ const Header = () => {
           <MenuItemsWrapper>
             {menuItems.map(({ name, path }, index) => (
               <MenuItem key={index}>
-                <Box>
-                  {location.pathname === path ? (
-                    <ActiveMenuButton onClick={() => navigate(path)}>
-                      {name}
-                    </ActiveMenuButton>
-                  ) : (
-                    <MenuButton onClick={() => navigate(path)}>
-                      {name}
-                    </MenuButton>
-                  )}
-                </Box>
+                {location.pathname === path ? (
+                  <ActiveMenuButton onClick={() => navigate(path)}>
+                    {name}
+                  </ActiveMenuButton>
+                ) : (
+                  <MenuButton onClick={() => navigate(path)}>{name}</MenuButton>
+                )}
               </MenuItem>
             ))}
           </MenuItemsWrapper>
           <MenuActions>
             <MenuItem>
-              <Typography style={{ color: "white" }}>
+              <MenuButton style={{ color: "white" }}>
                 {user.username}
-              </Typography>
+              </MenuButton>
             </MenuItem>
             <MenuItem>
               <Button variant="contained" color="primary" onClick={logout}>
@@ -86,11 +82,11 @@ const MenuButton = styled(Link)`
   cursor: pointer;
   font-weight: 600;
   &:hover {
-    color: #b0c4de;
+    color: #2f4f4f;
   }
 `;
 const ActiveMenuButton = styled(Link)`
-  color: #b0c4de;
+  color: #2f4f4f;
   text-decoration: none;
   cursor: pointer;
   font-weight: 600;
@@ -109,6 +105,17 @@ const MenuItem = styled(Box)`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 4px;
+`;
+
+const ActiveMenuItem = styled(Box)`
+  padding: 4px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  background-color: #e0ffff;
+  opacity: 0.6;
 `;
 
 const MenuItemsWrapper = styled(Box)`

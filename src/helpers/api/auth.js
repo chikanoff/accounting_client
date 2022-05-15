@@ -27,10 +27,9 @@ export const login = async (username, password) => {
       username,
       password,
     });
-    console.log(res);
     return res.data;
   } catch (e) {
-    console.error(e);
+    alert("Неверный логин или пароль!");
     return false;
   }
 };
