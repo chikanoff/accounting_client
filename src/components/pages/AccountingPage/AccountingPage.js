@@ -29,7 +29,7 @@ const AccountingPage = () => {
   const [selectedMedicinesIds, setSelectedMedicinesIds] = useState([]);
   const [isIncome, setIsIncome] = useState(true);
   const [employees, setEmployees] = useState([]);
-  const [selectedEmployee, setSelectedEmployee] = useState(employeeInitial);
+  const [selectedEmployee, setSelectedEmployee] = useState(-1);
 
   const { register, handleSubmit } = useForm();
 
@@ -75,12 +75,13 @@ const AccountingPage = () => {
       const { counts, prices, isIncome } = data;
       const medicines = selectedMedicinesIds.map((v, i) => ({
         medicineId: v,
-        price: Number(prices[i]),
-        count: Number(counts[i]),
+        price: Number(prices[v]),
+        count: Number(counts[v]),
       }));
+      console.log(selectedEmployee);
       const accounting = {
         income: isIncome,
-        employeeId: selectedEmployee,
+        employeeId: selectedEmployee !== -1 ? selectedEmployee : null,
         userId: currentUser.id,
         medicines,
       };
@@ -89,6 +90,15 @@ const AccountingPage = () => {
     },
     [selectedMedicinesIds]
   );
+
+  const deleteMedicine = useCallback(
+    async (id) => {
+      const newMedicines = selectedMedicinesIds.filter((v) => v !== id);
+      setSelectedMedicinesIds(newMedicines);
+    },
+    [selectedMedicinesIds]
+  );
+
   return (
     <Page title="Учет">
       <MainLayout>
@@ -112,7 +122,7 @@ const AccountingPage = () => {
               {...register("isIncome")}
               style={{ width: "480px" }}
               value={isIncome}
-              onChange={(e) => setIsIncome(e.target.value)}
+              onChange={(e) => setIsIncome(e.target.value === "true")}
             >
               <MenuItem key={true} value={true}>
                 Приход
@@ -209,7 +219,7 @@ const AccountingPage = () => {
                       {record.name}
                     </span>
                     <TextField
-                      {...registerDoubleField(`counts[${index}]`, {
+                      {...registerDoubleField(`counts[${record.id}]`, {
                         required: true,
                         min: 1,
                         max: 9999,
@@ -218,7 +228,7 @@ const AccountingPage = () => {
                       label="Кол-во"
                     />
                     <TextField
-                      {...registerDoubleField(`prices[${index}]`, {
+                      {...registerDoubleField(`prices[${record.id}]`, {
                         required: true,
                         min: 1,
                         max: 9999,
@@ -229,6 +239,9 @@ const AccountingPage = () => {
                         width: "100px",
                       }}
                     />
+                    <Button onClick={() => deleteMedicine(record.id)}>
+                      Удалить
+                    </Button>
                   </Box>
                 );
               })}
