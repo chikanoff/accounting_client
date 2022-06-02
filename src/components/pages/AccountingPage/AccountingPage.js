@@ -4,12 +4,21 @@ import MainLayout from "../../common/MainLayout";
 import styled from "@emotion/styled/macro";
 import Page from "../../common/Page";
 import medicinesResource from "../../../helpers/api/medicines";
-import { Button, MenuItem, Select, TextField } from "@mui/material";
+import {
+  FormControl,
+  Button,
+  MenuItem,
+  Select,
+  TextField,
+  InputLabel,
+} from "@mui/material";
 import { useForm } from "react-hook-form";
 import employeesResource from "../../../helpers/api/employees";
 import accountingsResource from "../../../helpers/api/accountings";
 import { useRecoilValue } from "recoil";
 import { currentUserState } from "../../../atoms/auth";
+import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 const initialValues = {
   id: 0,
@@ -30,6 +39,12 @@ const AccountingPage = () => {
   const [isIncome, setIsIncome] = useState(true);
   const [employees, setEmployees] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(-1);
+  const [date, setDate] = useState(new Date());
+
+  const handleDateChange = (newValue) => {
+    setDate(newValue);
+    console.log(date);
+  };
 
   const { register, handleSubmit } = useForm();
 
@@ -78,15 +93,26 @@ const AccountingPage = () => {
         price: Number(prices[v]),
         count: Number(counts[v]),
       }));
-      console.log(selectedEmployee);
       const accounting = {
         income: isIncome,
         employeeId: selectedEmployee !== -1 ? selectedEmployee : null,
         userId: currentUser.id,
+        date: date,
         medicines,
       };
-      console.log(accounting);
-      const res = await accountingsResource.create(accounting);
+      if (
+        accounting.medicines === [] ||
+        (accounting.income === false && accounting.employeeId === null) ||
+        accounting.date > new Date()
+      ) {
+        alert("Проверьте правильность заполнения полей");
+      } else {
+        const res = await accountingsResource.create(accounting);
+        setIsIncome(true);
+        setSelectedMedicinesIds([]);
+        setSelectedEmployee(-1);
+        setSelectedValue(0);
+      }
     },
     [selectedMedicinesIds]
   );
@@ -110,6 +136,15 @@ const AccountingPage = () => {
           }}
           onSubmit={handleSubmit(onSubmit)}
         >
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DesktopDatePicker
+              label="Дата"
+              inputFormat="dd/MM/yyyy"
+              value={date}
+              onChange={handleDateChange}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
           <Box
             style={{
               width: " 100%",
@@ -118,11 +153,15 @@ const AccountingPage = () => {
               alignItems: "center",
             }}
           >
+            <InputLabel>Вид учета</InputLabel>
             <Select
               {...register("isIncome")}
               style={{ width: "480px" }}
               value={isIncome}
-              onChange={(e) => setIsIncome(e.target.value === "true")}
+              onChange={(e) => {
+                setIsIncome(!isIncome);
+                console.log(e.target.value);
+              }}
             >
               <MenuItem key={true} value={true}>
                 Приход
@@ -132,18 +171,29 @@ const AccountingPage = () => {
               </MenuItem>
             </Select>
             {!isIncome && (
-              <Select
-                {...register("employeeId")}
-                style={{ width: "480px", marginTop: "1.25rem" }}
-                value={selectedEmployee}
-                onChange={(e) => setSelectedEmployee(e.target.value)}
+              <Box
+                style={{
+                  width: " 100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+                mt={2}
               >
-                {employees.map((employee) => (
-                  <MenuItem key={employee.id} value={employee.id}>
-                    {employee.fullName}
-                  </MenuItem>
-                ))}
-              </Select>
+                <InputLabel>Получатель</InputLabel>
+                <Select
+                  {...register("employeeId")}
+                  style={{ width: "480px" }}
+                  value={selectedEmployee}
+                  onChange={(e) => setSelectedEmployee(e.target.value)}
+                >
+                  {employees.map((employee) => (
+                    <MenuItem key={employee.id} value={employee.id}>
+                      {employee.fullName}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </Box>
             )}
           </Box>
 
@@ -161,19 +211,24 @@ const AccountingPage = () => {
               width: "100%",
             }}
           >
-            <Select
-              style={{ width: "100%" }}
-              value={selectedValue}
-              onChange={(e) => setSelectedValue(e.target.value)}
-            >
-              {records
-                .filter((record) => !selectedMedicinesIds.includes(record.id))
-                .map((record) => (
-                  <MenuItem key={record.id} value={record.id}>
-                    {record.name}
-                  </MenuItem>
-                ))}
-            </Select>
+            <FormControl style={{ width: "100%" }}>
+              <InputLabel>Название материала</InputLabel>
+              <Select
+                label="Название материала"
+                style={{ width: "100%" }}
+                value={selectedValue}
+                onChange={(e) => setSelectedValue(e.target.value)}
+              >
+                {records
+                  .filter((record) => !selectedMedicinesIds.includes(record.id))
+                  .map((record) => (
+                    <MenuItem key={record.id} value={record.id}>
+                      {record.name}
+                    </MenuItem>
+                  ))}
+              </Select>
+            </FormControl>
+
             <Button
               style={{ marginLeft: "1rem", height: "56px" }}
               color="primary"
@@ -183,7 +238,7 @@ const AccountingPage = () => {
                 setSelectedValue(0);
               }}
             >
-              Add
+              Добавить
             </Button>
           </Box>
           <hr
@@ -261,7 +316,7 @@ const AccountingPage = () => {
               width: "40%",
             }}
           >
-            submit
+            Создать
           </Button>
         </form>
       </MainLayout>

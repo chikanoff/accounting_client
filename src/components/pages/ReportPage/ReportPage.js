@@ -11,6 +11,7 @@ import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
 import Page from "../../common/Page";
 import * as flatten from "flat";
+import json from "../../../js.json";
 
 const ReportPage = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -24,12 +25,12 @@ const ReportPage = () => {
     setEndDate(newValue);
   };
 
-  const generateReport = async () => {
+  const generateReport = async (type) => {
     if (!startDate || !endDate) {
       alert("Выберите даты");
     } else {
-      if (startDate >= endDate) {
-        alert("Начальная дата должна быть меньше конечной");
+      if (startDate > endDate) {
+        alert("Начальная дата должна быть меньше или равна конечной");
       } else {
         const data = await accountingsResource.getByDates(startDate, endDate);
         if (!data) {
@@ -38,23 +39,67 @@ const ReportPage = () => {
           const fileType =
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
           const fileExtension = ".xlsx";
+          let newData;
           console.log(data);
-
-          const newData = data.map((item) => {
-            return {
-              "№": item.id,
-              Дата: item.date,
-              Тип: item.income ? "Приход" : "Расход",
-              Пользователь: item.user.fullName,
-              Материалы: item.medicines
-                .map((med) => {
-                  return `${med.medicine.name}; Количество: ${med.count}; Ед.изм.: ${med.medicine.unit.name}; Цена: ${med.price}`;
-                })
-                .join("\n"),
-            };
-          });
-
+          if (type === 1) {
+            newData = data.filter((i) => i.income === true);
+            newData = newData.map((item) => {
+              return item.medicines.map((medicine) => {
+                return {
+                  "№": item.id,
+                  Дата: item.date,
+                  Тип: item.income ? "Приход" : "Расход",
+                  Пользователь: item.user.fullName,
+                  Наименование: medicine.medicine.name,
+                  Количество: medicine.count,
+                  Цена: medicine.price,
+                  Сумма: medicine.count * medicine.price,
+                };
+              });
+            });
+            newData = newData.flat();
+          } else if (type === 2) {
+            newData = data.filter((i) => i.income === false);
+            newData = newData.map((item) => {
+              return item.medicines.map((medicine) => {
+                return {
+                  "№": item.id,
+                  Дата: item.date,
+                  Тип: item.income ? "Приход" : "Расход",
+                  Пользователь: item.user.fullName,
+                  Получатель: item.employee.fullName,
+                  Наименование: medicine.medicine.name,
+                  Количество: medicine.count,
+                  Цена: medicine.price,
+                  Сумма: medicine.count * medicine.price,
+                };
+              });
+            });
+            newData = newData.flat();
+          } else {
+            newData = data.map((item) => {
+              return item?.medicines.map((medicine) => {
+                return {
+                  "№": item.id,
+                  Дата: item.date,
+                  Тип: item.income ? "Приход" : "Расход",
+                  Пользователь: item.user.fullName,
+                  Наименование: medicine.medicine.name,
+                  Получатель:
+                    item.employee == null
+                      ? "Не предусмотрено"
+                      : item.employee.fullName,
+                  Количество: medicine.count,
+                  Цена: medicine.price,
+                  Сумма: medicine.count * medicine.price,
+                };
+              });
+            });
+            newData = newData.flat();
+          }
+          console.log(newData);
           const ws = XLSX.utils.json_to_sheet(newData);
+          console.log(ws);
           const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
           const excelBuffer = XLSX.write(wb, {
             bookType: "xlsx",
@@ -85,7 +130,7 @@ const ReportPage = () => {
           <Box
             style={{
               marginTop: "40px",
-              width: "60%",
+              width: "70%",
               display: "flex",
               flexDirection: "row",
               justifyContent: "space-between",
@@ -113,11 +158,27 @@ const ReportPage = () => {
           </Box>
           <Button
             style={{ marginTop: "40px" }}
-            onClick={() => generateReport()}
+            onClick={() => generateReport(1)}
             variant="outlined"
             color="success"
           >
-            Создать отчет
+            Отчет по приходам
+          </Button>
+          <Button
+            style={{ marginTop: "40px" }}
+            onClick={() => generateReport(2)}
+            variant="outlined"
+            color="success"
+          >
+            Отчет по расходам
+          </Button>
+          <Button
+            style={{ marginTop: "40px" }}
+            onClick={() => generateReport(3)}
+            variant="outlined"
+            color="success"
+          >
+            Отчет по приходам и расходам
           </Button>
         </MainBox>
       </MainLayout>

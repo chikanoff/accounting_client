@@ -114,7 +114,7 @@ const DepartmentPage = () => {
               setOpenPopup(true);
             }}
           >
-            Create
+            Создать
           </Button>
         </Box>
         <Box height="100%">
@@ -130,7 +130,7 @@ const DepartmentPage = () => {
           />
         </Box>
         <Popup
-          title="Department"
+          title="Отделение"
           openPopup={openPopup}
           setOpenPopup={setOpenPopup}
         >

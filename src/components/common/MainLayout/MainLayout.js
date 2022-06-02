@@ -1,5 +1,5 @@
 import styled from "@emotion/styled/macro";
-import { Container } from "@mui/material";
+import { Container, Box } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
 import React from "react";
 import FullPageContainer from "../FullPageContainer";
@@ -17,6 +17,7 @@ const useStyles = makeStyles(() =>
 const Main = styled.main`
   margin-top: 60px;
   height: 100%;
+  width: 100%;
   flex-grow: 1;
   padding: ${(props) => props.theme.spacing(3)};
 `;
@@ -28,7 +29,7 @@ const MainLayout = ({ children }) => {
     <FullPageContainer className={classes.root}>
       <Header />
       <Main>
-        <Container>{children}</Container>
+        <Box>{children}</Box>
       </Main>
       <Footer />
     </FullPageContainer>

@@ -142,7 +142,7 @@ const UserForm = ({ data, onSubmit }) => {
             color="primary"
             style={{ width: "100%" }}
           >
-            submit
+            {data.id == 0 ? "Создать" : "Сохранить"}
           </Button>
         </Box>
       </Container>

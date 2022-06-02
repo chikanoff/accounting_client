@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import { useForm } from "react-hook-form";
 import useLogin from "../../../hooks/useLogin";
 import Copyright from "../../Copyright";
+import Page from "../../common/Page";
 
 const SignInPage = () => {
   const login = useLogin();
@@ -34,80 +35,74 @@ const SignInPage = () => {
   } = useForm({ mode: "onBlur" });
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
+    <Page title="Авторизация">
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
         <Box
-          component="form"
-          onSubmit={handleSubmit(onSubmit)}
-          noValidate
-          sx={{ mt: 1 }}
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
         >
-          <TextField
-            {...register("username", {
-              required: true,
-              minLength: 4,
-              maxLength: 128,
-            })}
-            error={!!errors.username}
-            margin="normal"
-            required
-            fullWidth
-            id="username"
-            label="Username"
-            name="username"
-            autoComplete="username"
-            autoFocus
-          />
-
-          <TextField
-            {...register("password", {
-              required: true,
-              minLength: 4,
-              maxLength: 128,
-            })}
-            error={!!errors.password}
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Авторизация
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit(onSubmit)}
+            sx={{ mt: 1 }}
           >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-          </Grid>
+            <TextField
+              {...register("username", {
+                required: true,
+                minLength: 4,
+                maxLength: 128,
+              })}
+              error={!!errors.username}
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
+              autoFocus
+            />
+
+            <TextField
+              {...register("password", {
+                required: true,
+                minLength: 4,
+                maxLength: 128,
+              })}
+              error={!!errors.password}
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Авторизироваться
+            </Button>
+          </Box>
         </Box>
-      </Box>
-      <Copyright sx={{ mt: 8, mb: 4 }} />
-    </Container>
+        <Copyright sx={{ mt: 8, mb: 4 }} />
+      </Container>
+    </Page>
   );
 };
 

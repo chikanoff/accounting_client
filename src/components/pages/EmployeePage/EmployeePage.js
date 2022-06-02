@@ -124,7 +124,7 @@ const EmployeePage = () => {
               setOpenPopup(true);
             }}
           >
-            Create
+            Создать
           </Button>
         </Box>
         <Box height="100%">
@@ -140,7 +140,7 @@ const EmployeePage = () => {
           />
         </Box>
         <Popup
-          title="Employee"
+          title="Работник"
           openPopup={openPopup}
           setOpenPopup={setOpenPopup}
         >

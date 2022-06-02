@@ -1,0 +1,164 @@
+[
+    {
+      "id": 11,
+      "date": "27-05-2022",
+      "employee": {
+        "id": 1,
+        "fullName": "Петрова Ольга Александровна",
+        "department": {
+          "id": 1,
+          "name": "Отделение профилактики"
+        }
+      },
+      "income": false,
+      "user": {
+        "id": 3,
+        "fullName": "DEFAULT USER",
+        "username": "user",
+        "email": "user@gmail.com",
+        "password": "$2a$12$y10vVNc0gKZ0Dq4fbvby.eB0lRxcaKOgLHPknT199nZOQtxSIACB6",
+        "role": "ROLE_USER"
+      },
+      "medicines": [
+        {
+          "medicine": {
+            "id": 7,
+            "name": "Амиодарон концентрат для инфузий 50мг/мл 3мл",
+            "number": "0626382",
+            "supplier": {
+              "id": 1,
+              "name": "РУП Фармация"
+            },
+            "unit": {
+              "id": 1,
+              "name": "амп"
+            }
+          },
+          "count": 123,
+          "price": 33
+        },
+        {
+          "medicine": {
+            "id": 10,
+            "name": "Анальгин р-р д/инъекций 500мг/мл 2мл",
+            "number": "0626025",
+            "supplier": {
+              "id": 1,
+              "name": "РУП Фармация"
+            },
+            "unit": {
+              "id": 1,
+              "name": "амп"
+            }
+          },
+          "count": 123,
+          "price": 323
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "date": "27-05-2022",
+      "employee": {
+        "id": 1,
+        "fullName": "Петрова Ольга Александровна",
+        "department": {
+          "id": 1,
+          "name": "Отделение профилактики"
+        }
+      },
+      "income": false,
+      "user": {
+        "id": 3,
+        "fullName": "DEFAULT USER",
+        "username": "user",
+        "email": "user@gmail.com",
+        "password": "$2a$12$y10vVNc0gKZ0Dq4fbvby.eB0lRxcaKOgLHPknT199nZOQtxSIACB6",
+        "role": "ROLE_USER"
+      },
+      "medicines": []
+    },
+    {
+      "id": 13,
+      "date": "27-05-2022",
+      "employee": null,
+      "income": true,
+      "user": {
+        "id": 3,
+        "fullName": "DEFAULT USER",
+        "username": "user",
+        "email": "user@gmail.com",
+        "password": "$2a$12$y10vVNc0gKZ0Dq4fbvby.eB0lRxcaKOgLHPknT199nZOQtxSIACB6",
+        "role": "ROLE_USER"
+      },
+      "medicines": [
+        {
+          "medicine": {
+            "id": 9,
+            "name": "Аммиак р-р д/наруж.прим. 10% 1мл",
+            "number": "0626071",
+            "supplier": {
+              "id": 1,
+              "name": "РУП Фармация"
+            },
+            "unit": {
+              "id": 1,
+              "name": "амп"
+            }
+          },
+          "count": 11,
+          "price": 11
+        },
+        {
+          "medicine": {
+            "id": 11,
+            "name": "Анаприлин табл 40мг",
+            "number": "0626026",
+            "supplier": {
+              "id": 1,
+              "name": "РУП Фармация"
+            },
+            "unit": {
+              "id": 2,
+              "name": "табл"
+            }
+          },
+          "count": 32,
+          "price": 321
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "date": "27-05-2022",
+      "employee": null,
+      "income": true,
+      "user": {
+        "id": 3,
+        "fullName": "DEFAULT USER",
+        "username": "user",
+        "email": "user@gmail.com",
+        "password": "$2a$12$y10vVNc0gKZ0Dq4fbvby.eB0lRxcaKOgLHPknT199nZOQtxSIACB6",
+        "role": "ROLE_USER"
+      },
+      "medicines": [
+        {
+          "medicine": {
+            "id": 10,
+            "name": "Анальгин р-р д/инъекций 500мг/мл 2мл",
+            "number": "0626025",
+            "supplier": {
+              "id": 1,
+              "name": "РУП Фармация"
+            },
+            "unit": {
+              "id": 1,
+              "name": "амп"
+            }
+          },
+          "count": 11,
+          "price": 11
+        }
+      ]
+    }
+  ]

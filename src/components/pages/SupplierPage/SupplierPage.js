@@ -111,7 +111,7 @@ const SupplierPage = () => {
               setOpenPopup(true);
             }}
           >
-            Create
+            Создать
           </Button>
         </Box>
         <Box height="100%">
@@ -127,7 +127,7 @@ const SupplierPage = () => {
           />
         </Box>
         <Popup
-          title="Supplier"
+          title="Поставщик"
           openPopup={openPopup}
           setOpenPopup={setOpenPopup}
         >

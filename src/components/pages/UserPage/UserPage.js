@@ -35,13 +35,13 @@ const UserPage = () => {
   const columns = useMemo(
     () => [
       { field: "id", headerName: "Id", width: 100 },
-      { field: "fullName", headerName: "Full Name", flex: 1 },
+      { field: "fullName", headerName: "ФИО", flex: 1 },
       { field: "email", headerName: "Email", flex: 1 },
       { field: "username", headerName: "Username", flex: 1 },
-      { field: "role", headerName: "Role", flex: 1 },
+      { field: "role", headerName: "Роль", flex: 1 },
       {
         field: "action",
-        headerName: "Actions",
+        headerName: "Действия",
         flex: 1,
         sortable: false,
         renderCell: (params) => (
@@ -125,7 +125,7 @@ const UserPage = () => {
               setOpenPopup(true);
             }}
           >
-            Create
+            Создать
           </Button>
         </Box>
         <Box height="100%">
@@ -140,7 +140,11 @@ const UserPage = () => {
             columns={columns}
           />
         </Box>
-        <Popup title="User" openPopup={openPopup} setOpenPopup={setOpenPopup}>
+        <Popup
+          title="Пользователь"
+          openPopup={openPopup}
+          setOpenPopup={setOpenPopup}
+        >
           {openPopup && <UserForm data={recordForEdit} onSubmit={addOrEdit} />}
         </Popup>
       </MainLayout>

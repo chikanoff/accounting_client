@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<0>
+	<id>11</id>
+	<date>27-05-2022</date>
+	<employee>
+		<id>1</id>
+		<fullName>Петрова Ольга Александровна</fullName>
+		<department>
+			<id>1</id>
+			<name>Отделение профилактики</name>
+		</department>
+	</employee>
+	<income>false</income>
+	<user>
+		<id>3</id>
+		<fullName>DEFAULT USER</fullName>
+		<username>user</username>
+		<email>user@gmail.com</email>
+		<password>$2a$12$y10vVNc0gKZ0Dq4fbvby.eB0lRxcaKOgLHPknT199nZOQtxSIACB6</password>
+		<role>ROLE_USER</role>
+	</user>
+	<medicines>
+		<medicine>
+			<id>10</id>
+			<name>Анальгин р-р д/инъекций 500мг/мл 2мл</name>
+			<number>0626025</number>
+			<supplier>
+				<id>1</id>
+				<name>РУП Фармация</name>
+			</supplier>
+			<unit>
+				<id>1</id>
+				<name>амп</name>
+			</unit>
+		</medicine>
+		<count>123</count>
+		<price>323</price>
+	</medicines>
+	<medicines>
+		<medicine>
+			<id>7</id>
+			<name>Амиодарон концентрат для инфузий 50мг/мл 3мл</name>
+			<number>0626382</number>
+			<supplier>
+				<id>1</id>
+				<name>РУП Фармация</name>
+			</supplier>
+			<unit>
+				<id>1</id>
+				<name>амп</name>
+			</unit>
+		</medicine>
+		<count>123</count>
+		<price>33</price>
+	</medicines>
+</0>
+<1>
+	<id>12</id>
+	<date>27-05-2022</date>
+	<employee>
+		<id>1</id>
+		<fullName>Петрова Ольга Александровна</fullName>
+		<department>
+			<id>1</id>
+			<name>Отделение профилактики</name>
+		</department>
+	</employee>
+	<income>false</income>
+	<user>
+		<id>3</id>
+		<fullName>DEFAULT USER</fullName>
+		<username>user</username>
+		<email>user@gmail.com</email>
+		<password>$2a$12$y10vVNc0gKZ0Dq4fbvby.eB0lRxcaKOgLHPknT199nZOQtxSIACB6</password>
+		<role>ROLE_USER</role>
+	</user>
+</1>
+<2>
+	<id>13</id>
+	<date>27-05-2022</date>
+	<employee />
+	<income>true</income>
+	<user>
+		<id>3</id>
+		<fullName>DEFAULT USER</fullName>
+		<username>user</username>
+		<email>user@gmail.com</email>
+		<password>$2a$12$y10vVNc0gKZ0Dq4fbvby.eB0lRxcaKOgLHPknT199nZOQtxSIACB6</password>
+		<role>ROLE_USER</role>
+	</user>
+	<medicines>
+		<medicine>
+			<id>11</id>
+			<name>Анаприлин табл 40мг</name>
+			<number>0626026</number>
+			<supplier>
+				<id>1</id>
+				<name>РУП Фармация</name>
+			</supplier>
+			<unit>
+				<id>2</id>
+				<name>табл</name>
+			</unit>
+		</medicine>
+		<count>32</count>
+		<price>321</price>
+	</medicines>
+	<medicines>
+		<medicine>
+			<id>9</id>
+			<name>Аммиак р-р д/наруж.прим. 10% 1мл</name>
+			<number>0626071</number>
+			<supplier>
+				<id>1</id>
+				<name>РУП Фармация</name>
+			</supplier>
+			<unit>
+				<id>1</id>
+				<name>амп</name>
+			</unit>
+		</medicine>
+		<count>11</count>
+		<price>11</price>
+	</medicines>
+</2>
+<3>
+	<id>14</id>
+	<date>27-05-2022</date>
+	<employee />
+	<income>true</income>
+	<user>
+		<id>3</id>
+		<fullName>DEFAULT USER</fullName>
+		<username>user</username>
+		<email>user@gmail.com</email>
+		<password>$2a$12$y10vVNc0gKZ0Dq4fbvby.eB0lRxcaKOgLHPknT199nZOQtxSIACB6</password>
+		<role>ROLE_USER</role>
+	</user>
+	<medicines>
+		<medicine>
+			<id>10</id>
+			<name>Анальгин р-р д/инъекций 500мг/мл 2мл</name>
+			<number>0626025</number>
+			<supplier>
+				<id>1</id>
+				<name>РУП Фармация</name>
+			</supplier>
+			<unit>
+				<id>1</id>
+				<name>амп</name>
+			</unit>
+		</medicine>
+		<count>11</count>
+		<price>11</price>
+	</medicines>
+</3>

@@ -1,15 +1,15 @@
-import React from 'react';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import React from "react";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
 
-const Copyright = props => (
+const Copyright = (props) => (
   <Typography variant="body2" color="text.secondary" align="center" {...props}>
-    {'Copyright © '}
+    {"Copyright © "}
     <Link color="inherit" href="https://t.me/chikanoff">
       Your Website
-    </Link>{' '}
+    </Link>{" "}
     {new Date().getFullYear()}
-    {'.'}
+    {"."}
   </Typography>
 );
 
